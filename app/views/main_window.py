@@ -25,12 +25,14 @@ class MainWindow(FluentWindow):
         super().__init__()
 
         self.homeInterface = Widget('Home Interface', self)
+        self.formatInterface = Widget('Format conversion Interface', self)
 
         self.initNavigation()
         self.initWindow()
 
     def initNavigation(self):
-        self.addSubInterface(self.homeInterface, FluentIcon.HOME, 'Home')
+        self.addSubInterface(self.homeInterface, FluentIcon.HOME, '主页')
+        self.addSubInterface(self.formatInterface, FluentIcon.SYNC, '格式转换')
         # 设置展开宽度
         self.navigationInterface.setExpandWidth(150)
         # 这行代码必须在 setExpandWidth() 后面调用，设置默认展开
