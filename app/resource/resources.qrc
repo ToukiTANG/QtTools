@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/images">
+    </qresource>
+    <qresource prefix="/icons">
+        <file alias="China_Railways.png">icons/China_Railways.png</file>
+        <file alias="China_Railways.svg">icons/China_Railways.svg</file>
+    </qresource>
+</RCC>
