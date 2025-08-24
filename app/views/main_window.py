@@ -5,6 +5,8 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QFrame, QHBoxLayout, QApplication
 from qfluentwidgets import SubtitleLabel, setFont, FluentWindow, FluentIcon
 import app.resource.resources_rc
+from app.views.home_interface import HomeInterface
+
 
 class Widget(QFrame):
     def __init__(self, text: str, parent=None):
@@ -24,7 +26,7 @@ class MainWindow(FluentWindow):
     def __init__(self):
         super().__init__()
 
-        self.homeInterface = Widget('Home Interface', self)
+        self.homeInterface = HomeInterface(self)
         self.formatInterface = Widget('Format conversion Interface', self)
 
         self.initNavigation()
@@ -49,6 +51,10 @@ class MainWindow(FluentWindow):
 
 
 if __name__ == '__main__':
+    QApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
+    QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
+    QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps)
+
     app = QApplication(sys.argv)
     w = MainWindow()
     w.show()
