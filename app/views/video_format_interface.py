@@ -5,14 +5,14 @@ from qfluentwidgets import ScrollArea
 from app.components.info_layout import InfoLayout
 
 
-class HomeInterface(ScrollArea):
+class VideoFormatInterface(ScrollArea):
     """
-    首页interface，可以放一些描述性信息，如公告、使用帮助等
+    视频转换interface
     """
 
     def __init__(self, parent=None):
-        super().__init__(parent)
-        self.view = QWidget(self)
+        super().__init__(parent=parent)
+        self.view = QWidget()
         self.infoLayout = InfoLayout(self.view)
 
         self._initWidget()
@@ -24,5 +24,5 @@ class HomeInterface(ScrollArea):
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
 
         self.resize(780, 800)
-        self.setObjectName("homeInterface")
+        self.setObjectName("videoFormatInterface")
         self.enableTransparentBackground()
