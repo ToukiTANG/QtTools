@@ -10,43 +10,31 @@ from app.views.home_interface import HomeInterface
 from app.views.video_format_interface import VideoFormatInterface
 
 
-class Widget(QFrame):
-    def __init__(self, text: str, parent=None):
-        super().__init__(parent=parent)
-        self.label = SubtitleLabel(text, self)
-        self.hBoxLayout = QHBoxLayout(self)
-
-        setFont(self.label, 24)
-        self.label.setAlignment(Qt.AlignHCenter)  # type: ignore
-        self.hBoxLayout.addWidget(self.label, 1, Qt.AlignHCenter)
-        self.setObjectName(text.replace(' ', '-'))
-        # leave some space for title bar
-        self.hBoxLayout.setContentsMargins(0, 32, 0, 0)
-
-
 class MainWindow(FluentWindow):
     def __init__(self):
         super().__init__()
 
         self.homeInterface = HomeInterface(self)
-        self.formatInterface = Widget('Format conversion Interface', self)
         self.videoFormatInterface = VideoFormatInterface()
 
         self.initNavigation()
         self.initWindow()
 
     def initNavigation(self):
-        self.addSubInterface(self.homeInterface, FluentIcon.HOME, '主页')
-        self.addSubInterface(self.formatInterface, FluentIcon.SYNC, '格式转换', NavigationItemPosition.SCROLL)
-        self.addSubInterface(self.videoFormatInterface, FluentIcon.MOVIE, text='视频', parent=self.formatInterface)
+        self.addSubInterface(self.homeInterface, FluentIcon.HOME, '主页', isTransparent=True)
+        formatParentItem = self.navigationInterface.addItem(
+            routeKey="formatParent",
+            icon=FluentIcon.SYNC,  # 图标
+            text="格式转换",
+            selectable=False,
+            position=NavigationItemPosition.TOP
+        )
+        formatParentItem.setObjectName('formatParent')
+        self.addSubInterface(self.videoFormatInterface, FluentIcon.MOVIE, text='视频', parent=formatParentItem, isTransparent=True)
         # 设置展开宽度
         self.navigationInterface.setExpandWidth(150)
         # 这行代码必须在 setExpandWidth() 后面调用，设置默认展开
         self.navigationInterface.setCollapsible(False)
-
-        item = self.navigationInterface.widget(self.formatInterface.objectName())
-        item.clicked.disconnect()  # 取消默认点击逻辑
-        item.clicked.connect(lambda: None)  # 改成空操作
 
     def initWindow(self):
         self.resize(1000, 700)

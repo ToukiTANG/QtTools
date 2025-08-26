@@ -2,7 +2,8 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget
 from qfluentwidgets import ScrollArea
 
-from app.components.info_layout import InfoLayout
+from app.components.box_layout import BoxLayout
+from app.components.info_card import InfoCard
 
 
 class HomeInterface(ScrollArea):
@@ -13,7 +14,9 @@ class HomeInterface(ScrollArea):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.view = QWidget(self)
-        self.infoLayout = InfoLayout(self.view)
+        self.vBoxLayout = BoxLayout(self.view)
+
+        self.infoCard = InfoCard()
 
         self._initWidget()
 
@@ -23,6 +26,7 @@ class HomeInterface(ScrollArea):
         self.setWidgetResizable(True)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
 
-        self.resize(780, 800)
+        self.vBoxLayout.addWidget(self.infoCard, 0, Qt.AlignmentFlag.AlignTop)
+
         self.setObjectName("homeInterface")
         self.enableTransparentBackground()
