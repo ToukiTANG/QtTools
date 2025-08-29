@@ -11,6 +11,7 @@ class InfoCard(SimpleCardWidget):
         self._initWidget()
 
     def _initWidget(self):
+        self.setBorderRadius(8)
         self.test.setText("Home")
         self.qv.addWidget(self.test)
 

@@ -2,8 +2,8 @@ import sys
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QFrame, QHBoxLayout, QApplication
-from qfluentwidgets import SubtitleLabel, setFont, FluentWindow, FluentIcon, NavigationItemPosition
+from PyQt5.QtWidgets import QApplication
+from qfluentwidgets import FluentWindow, FluentIcon, NavigationItemPosition
 
 import app.resource.resources_rc
 from app.views.home_interface import HomeInterface
@@ -30,7 +30,7 @@ class MainWindow(FluentWindow):
             position=NavigationItemPosition.TOP
         )
         formatParentItem.setObjectName('formatParent')
-        self.addSubInterface(self.videoFormatInterface, FluentIcon.MOVIE, text='视频', parent=formatParentItem, isTransparent=True)
+        self.addSubInterface(self.videoFormatInterface, FluentIcon.VIDEO, text='视频', parent=formatParentItem, isTransparent=True)
         # 设置展开宽度
         self.navigationInterface.setExpandWidth(150)
         # 这行代码必须在 setExpandWidth() 后面调用，设置默认展开

@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QWidget
 from qfluentwidgets import ScrollArea
 
 from app.components.box_layout import BoxLayout
+from app.components.video_format_conversion_card import VideoFormatConversionCard
 
 
 class VideoFormatInterface(ScrollArea):
@@ -14,6 +15,7 @@ class VideoFormatInterface(ScrollArea):
         super().__init__(parent=parent)
         self.view = QWidget()
         self.vBoxLayout = BoxLayout(self.view)
+        self.formatConversionCard = VideoFormatConversionCard()
 
         self._initWidget()
 
@@ -22,6 +24,8 @@ class VideoFormatInterface(ScrollArea):
         self.setAcceptDrops(True)
         self.setWidgetResizable(True)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+
+        self.vBoxLayout.addWidget(self.formatConversionCard, 0, Qt.AlignmentFlag.AlignTop)
 
         self.setObjectName("videoFormatInterface")
         self.enableTransparentBackground()
