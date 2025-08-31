@@ -32,6 +32,7 @@ class VideoFormatConversionCard(GroupHeaderCardWidget):
 
         self._initWidgets()
         self._initLayout()
+        self._initSetting()
         self._connectSignalToSlot()
 
     def _initWidgets(self):
@@ -88,6 +89,9 @@ class VideoFormatConversionCard(GroupHeaderCardWidget):
         )
 
         self.vBoxLayout.addLayout(self.bottomHLayout)
+
+    def _initSetting(self):
+        self.selectedSpeed=VideoConversionSpeed.MEDIUM
 
     def _selectVideoFile(self):
         file, _ = QFileDialog.getOpenFileName(self, '选择文件', self.videoSelectedGroup.content())

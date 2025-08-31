@@ -2,8 +2,9 @@
 name = "qttools"
 version = "0.1.0"
 description = "Add your description here"
-requires-python = ">=3.12"
+requires-python = "==3.12.*"
 dependencies = [
+    "nuitka>=2.7.13",
     "pyqt-fluent-widgets[full]>=1.8.6",
 ]
 [tool.uv]

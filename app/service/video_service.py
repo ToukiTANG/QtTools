@@ -1,13 +1,29 @@
 import os
 import re
 import subprocess
+import sys
 
 from PyQt5.QtCore import QThread, pyqtSignal
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-FFMPEG_PATH = os.path.join(BASE_DIR, "..", "tools", "ffmpeg.exe")
-FFPLAY_PATH = os.path.join(BASE_DIR, "..", "tools", "ffplay.exe")
-FFPROBE_PATH = os.path.join(BASE_DIR, "..", "tools", "ffprobe.exe")
+
+def get_ffmpeg_path(exe: str):
+    """
+    返回打包后或开发环境下 ffmpeg.exe 的绝对路径
+    """
+    if getattr(sys, 'frozen', False):
+        # 打包后，base_path 指向可执行文件所在目录
+        base_path = os.path.dirname(sys.executable)
+    else:
+        # 开发环境，base_path 指向项目根目录
+        # video.py 在 app/service 下，tools 在根目录
+        base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+
+    return os.path.join(base_path, 'tools', exe)
+
+
+FFMPEG_PATH = get_ffmpeg_path('ffmpeg.exe')
+# FFPLAY_PATH = get_ffmpeg_path('ffplay.exe')   #暂时不用播放相关的功能
+FFPROBE_PATH = get_ffmpeg_path('ffprobe.exe')
 
 
 class VideoFormatConverter(QThread):
@@ -101,7 +117,7 @@ class FFmpegCommand:
 
         print(f'ffmpeg command: {self.command}')
 
-        return subprocess.Popen(self.command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, shell=True)
+        return subprocess.Popen(self.command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, shell=True, creationflags=subprocess.CREATE_NO_WINDOW)
 
 
 if __name__ == '__main__':

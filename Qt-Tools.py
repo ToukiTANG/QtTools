@@ -1,4 +1,5 @@
 import sys
+import app.log.log_config
 
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import Qt
@@ -9,7 +10,7 @@ QApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPo
 QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
 QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps)
 
-app = QApplication(sys.argv)
+application = QApplication(sys.argv)
 w = MainWindow()
 w.show()
-app.exec_()
+application.exec_()
