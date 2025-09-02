@@ -12,10 +12,10 @@ python -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
 ```
-**注意**，如果使用venv管理环境，python版本需指定为3.12.*
+**注意**，如果使用venv管理环境，python版本需指定为3.12
 3. conda管理环境
 ```shell
-conda create -n qt-tools python=3.12.*
+conda create -n qt-tools python=3.12
 conda activate qt-tools
 pip install -r requirements.txt
 ```
